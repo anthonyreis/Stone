@@ -41,6 +41,13 @@ functions:
           path: /user
           method: post
 
+  getUser:
+    handler: src/handlers/getUser/handler.handler
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: get
+
 custom:
   serverless-offline:
     host: 0.0.0.0
