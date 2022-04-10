@@ -3,18 +3,18 @@ const commonMiddleware = require('../../../common/middleware');
 const schema = require('./validations/inputSchema');
 const { validator } = require('./validations/validator');
 
-const incrementCounter = async (event, context) => {
+const getCounter = async (event, context) => {
     try {
         validator(schema, event.pathParameters);
 
         const { key } = event.pathParameters;
 
-        const result = await countapi.hit(key);
+        const result = await countapi.get(key)
 
         return {
             statusCode: 200,
             body: JSON.stringify({
-                message: `Hit at ${result.path}`
+                message: `${result.value} hits at ${result.path}`
             })
         }
     } catch (err) {
@@ -25,6 +25,7 @@ const incrementCounter = async (event, context) => {
             })
         }
     }
+
 }
 
-module.exports.handler = commonMiddleware(incrementCounter)
+module.exports.handler = commonMiddleware(getCounter)
