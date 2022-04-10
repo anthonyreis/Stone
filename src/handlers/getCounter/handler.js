@@ -1,8 +1,12 @@
 const countapi = require('countapi-js');
 const commonMiddleware = require('../../../common/middleware');
+const schema = require('./validations/inputSchema');
+const { validator } = require('./validations/validator');
 
 const getCounter = async (event, context) => {
     try {
+        validator(schema, event.pathParameters);
+
         const { key } = event.pathParameters;
 
         const result = await countapi.get(key)
