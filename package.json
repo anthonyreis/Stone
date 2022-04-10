@@ -1,0 +1,35 @@
+{
+  "name": "teste_stone",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000t\u0000e\u0000s\u0000t\u0000e\u0000S\u0000t\u0000o\u0000n\u0000e\u0000\r\u0000 \u0000",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonyreis/testeStone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anthonyreis/testeStone/issues"
+  },
+  "homepage": "https://github.com/anthonyreis/testeStone#readme",
+  "dependencies": {
+    "@middy/core": "^2.5.7",
+    "@middy/http-error-handler": "^2.5.7",
+    "@middy/http-event-normalizer": "^2.5.7",
+    "@middy/http-json-body-parser": "^2.5.7",
+    "aws-sdk": "^2.1109.0",
+    "bcryptjs": "^2.4.3",
+    "countapi-js": "^1.0.2",
+    "http-errors": "^2.0.0",
+    "joi": "^17.6.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "serverless-offline": "^8.5.0"
+  }
+}

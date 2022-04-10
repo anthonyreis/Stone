@@ -1,0 +1,28 @@
+service: stone
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  endpointType: regional
+  stage: ${opt:stage, 'dev'}
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  region: sa-east-1
+  memorySize: 256
+
+functions:
+  incrementCounter:
+    handler: src/handlers/incrementCounter/handler.handler
+    events:
+      - httpApi:
+          path: /counter/{key}
+          method: post
+
+custom:
+  serverless-offline:
+    host: 0.0.0.0
+    port: 3000
+
+plugins:
+  - serverless-offline
