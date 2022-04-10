@@ -34,6 +34,13 @@ functions:
           path: /counter/{key}
           method: get
 
+  createUser:
+    handler: src/handlers/createUser/handler.handler
+    events:
+      - httpApi:
+          path: /user
+          method: post
+
 custom:
   serverless-offline:
     host: 0.0.0.0
