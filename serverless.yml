@@ -10,6 +10,14 @@ provider:
   lambdaHashingVersion: 20201221
   region: sa-east-1
   memorySize: 256
+  environment:
+    USER_TABLE_NAME: ${self:custom.UserTable.name}
+  iamRoleStatements:
+    - ${file(iam/UserTableIAM.yml):UserTableIAM}
+
+resources:
+  Resources:
+    UserTable: ${file(resources/UserTable.yml):UserTable}
 
 functions:
   incrementCounter:
@@ -30,6 +38,10 @@ custom:
   serverless-offline:
     host: 0.0.0.0
     port: 3000
+
+  UserTable:
+    name: !Ref UserTable
+    arn: !GetAtt UserTable.Arn
 
 plugins:
   - serverless-offline
