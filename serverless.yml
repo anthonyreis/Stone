@@ -19,6 +19,13 @@ functions:
           path: /counter/{key}
           method: post
 
+  getCounter:
+    handler: src/handlers/getCounter/handler.handler
+    events:
+      - httpApi:
+          path: /counter/{key}
+          method: get
+
 custom:
   serverless-offline:
     host: 0.0.0.0
