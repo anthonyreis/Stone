@@ -18,6 +18,11 @@ module.exports.validUser = async (userId) => {
             email: user.email
         };
     } catch (err) {
-        throw new createError.InternalServerError('An unexpected error occurred')
+        return {
+            statusCode: err.statusCode ?? 500,
+            body: JSON.stringify({
+                message: err.message ? err.message : 'An unexpected error occurred'
+            })
+        }
     }
 }

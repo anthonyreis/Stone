@@ -63,6 +63,9 @@ custom:
   serverless-offline:
     host: 0.0.0.0
     port: 3000
+  dynamodb:
+    stages:
+      - ${self:provider.stage}
 
   UserTable:
     name: !Ref UserTable
