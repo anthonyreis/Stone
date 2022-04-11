@@ -1,4 +1,3 @@
-const createError = require('http-errors');
 const commonMiddleware = require('../../../common/middleware');
 const { validUser } = require("./functions/validUser")
 const schema = require('./validations/inputSchema');
@@ -13,10 +12,12 @@ const createUser = async (event, context) => {
         return {
             status_code: 201,
             body: {
-                message: `User ${user.username} created successfully with id ${user.id}`
+                message: `User ${user.username} created successfully with id ${user.id}`,
+                token: user.token
             }
         }
     } catch (err) {
+        console.log(err)
         return {
             statusCode: err.statusCode || 500,
             body: JSON.stringify({
