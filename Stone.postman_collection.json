@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "ffb45a05-3670-48f1-9772-e89d54ba110b",
+		"name": "Stone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "IncrementCounter",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://u3njnkryfg.execute-api.sa-east-1.amazonaws.com/counter/anthony.com",
+					"protocol": "https",
+					"host": [
+						"u3njnkryfg",
+						"execute-api",
+						"sa-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"counter",
+						"anthony.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCounter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://u3njnkryfg.execute-api.sa-east-1.amazonaws.com/counter/anthony.com",
+					"protocol": "https",
+					"host": [
+						"u3njnkryfg",
+						"execute-api",
+						"sa-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"counter",
+						"anthony.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhOWVjYTBjLWM5YzItNDNkYS04YjdiLWU4MDQ3MGFiZWVlNiIsInVzZXJuYW1lIjoiYW50aG9ueTIiLCJlbWFpbCI6ImFudGhvbnkucmVpczJAZ21haWwuY29tIiwiaWF0IjoxNjQ5Njk3MTA5fQ.ml8CF_8UUT3cDsywi1rNMAoo329NyuosoMRnTi0z4es",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://u3njnkryfg.execute-api.sa-east-1.amazonaws.com/user/6a9eca0c-c9c2-43da-8b7b-e80470abeee6",
+					"protocol": "https",
+					"host": [
+						"u3njnkryfg",
+						"execute-api",
+						"sa-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"user",
+						"6a9eca0c-c9c2-43da-8b7b-e80470abeee6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
