@@ -2,6 +2,7 @@ const aws = require('aws-sdk');
 const { v4: uuid } = require('uuid');
 const bcrypt = require('bcryptjs');
 const createError = require('http-errors');
+const { generateToken } = require('./generateToken');
 
 const dynamodb = new aws.DynamoDB.DocumentClient();
 
@@ -22,9 +23,12 @@ module.exports.validUser = async ({ username, password, email }) => {
             Item: user,
         }).promise();
 
+        const token = await generateToken(user);
+
         return {
-            id,
-            username,
+            id: user.id,
+            username: user.username,
+            token,
         }
     } catch (err) {
         throw new createError.InternalServerError('An unexpected error occurred')

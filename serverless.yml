@@ -12,14 +12,24 @@ provider:
   memorySize: 256
   environment:
     USER_TABLE_NAME: ${self:custom.UserTable.name}
+    JWT_KEY: 240ec54a-2e0a-420f-9af9-5260ee6cdec2
   iamRoleStatements:
     - ${file(iam/UserTableIAM.yml):UserTableIAM}
+  httpApi:
+    authorizers:
+      customAuthorizer:
+        type: request
+        functionName: authFunc
+        identitySource: $request.header.Authorization
 
 resources:
   Resources:
     UserTable: ${file(resources/UserTable.yml):UserTable}
 
 functions:
+  authFunc:
+    handler: common/auth/index.auth
+
   incrementCounter:
     handler: src/handlers/incrementCounter/handler.handler
     events:
@@ -47,6 +57,7 @@ functions:
       - httpApi:
           path: /user/{id}
           method: get
+          authorizer: customAuthorizer
 
 custom:
   serverless-offline:
