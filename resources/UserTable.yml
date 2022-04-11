@@ -6,6 +6,15 @@ UserTable:
     AttributeDefinitions:
       - AttributeName: id
         AttributeType: S
+      - AttributeName: username
+        AttributeType: S
     KeySchema:
         - AttributeName: id
           KeyType: HASH
+    GlobalSecondaryIndexes:
+      - IndexName: username
+        KeySchema:
+          - AttributeName: username
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL

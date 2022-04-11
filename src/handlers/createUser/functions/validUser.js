@@ -3,17 +3,21 @@ const { v4: uuid } = require('uuid');
 const bcrypt = require('bcryptjs');
 const createError = require('http-errors');
 const { generateToken } = require('./generateToken');
+const { uniqueUser } = require('./uniqueUser');
 
 const dynamodb = new aws.DynamoDB.DocumentClient();
 
 module.exports.validUser = async ({ username, password, email }) => {
     try {
+        const unique = await uniqueUser(username, email);
+
+        if (unique.statusCode) return unique;
+        
         const hashPassword = await bcrypt.hash(password, 8);
 
         const user = {
             id: uuid(),
             username,
-            email,
             password: hashPassword,
             createdAt: new Date().toISOString(),
         }

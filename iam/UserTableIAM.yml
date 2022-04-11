@@ -1,9 +1,7 @@
 UserTableIAM:
   Effect: Allow
   Action:
-    - dynamodb:PutItem
-    - dynamodb:Scan
-    - dynamodb:GetItem
-    - dynamodb:UpdateItem
+    - dynamodb:*
   Resource:
     - ${self:custom.UserTable.arn}
+    - ${self:custom.UserTable.index}
