@@ -9,6 +9,8 @@ const createUser = async (event, context) => {
 
         const user = await validUser(event.body);
 
+        if (user.statusCode) return user;
+
         return {
             status_code: 201,
             body: {
