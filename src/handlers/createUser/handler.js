@@ -17,7 +17,6 @@ const createUser = async (event, context) => {
             }
         }
     } catch (err) {
-        console.log(err)
         return {
             statusCode: err.statusCode || 500,
             body: JSON.stringify({
