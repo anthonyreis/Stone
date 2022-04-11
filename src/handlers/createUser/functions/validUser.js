@@ -1,31 +1,19 @@
-const aws = require('aws-sdk');
-const { v4: uuid } = require('uuid');
 const bcrypt = require('bcryptjs');
-const createError = require('http-errors');
+const { createUser } = require('./createUser');
 const { generateToken } = require('./generateToken');
 const { uniqueUser } = require('./uniqueUser');
 
-const dynamodb = new aws.DynamoDB.DocumentClient();
-
-module.exports.validUser = async ({ username, password, email }) => {
+module.exports.validUser = async (userData) => {
     try {
-        const unique = await uniqueUser(username, email);
+        const unique = await uniqueUser(userData);
 
         if (unique.statusCode) return unique;
         
         const hashPassword = await bcrypt.hash(password, 8);
 
-        const user = {
-            id: uuid(),
-            username,
-            password: hashPassword,
-            createdAt: new Date().toISOString(),
-        }
+        const user = await createUser(userData, hashPassword)
 
-        await dynamodb.put({
-            TableName: process.env.USER_TABLE_NAME,
-            Item: user,
-        }).promise();
+        if (user.statusCode) return user;
 
         const token = await generateToken(user);
 
@@ -35,6 +23,11 @@ module.exports.validUser = async ({ username, password, email }) => {
             token,
         }
     } catch (err) {
-        throw new createError.InternalServerError('An unexpected error occurred')
+        return {
+            statusCode: err.statusCode ?? 500,
+            body: JSON.stringify({
+                message: err.message ? err.message : 'An unexpected error occurred'
+            })
+        }
     }
 }
