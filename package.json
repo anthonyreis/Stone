@@ -27,9 +27,11 @@
     "countapi-js": "^1.0.2",
     "http-errors": "^2.0.0",
     "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "jest": "^27.5.1",
     "serverless-offline": "^8.5.0"
   }
 }
