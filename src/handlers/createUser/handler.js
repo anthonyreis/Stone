@@ -12,7 +12,7 @@ const createUser = async (event, context) => {
         if (user.statusCode) return user;
 
         return {
-            status_code: 201,
+            statusCode: 201,
             body: {
                 message: `User ${user.username} created successfully with id ${user.id}`,
                 token: user.token
