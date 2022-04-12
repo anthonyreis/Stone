@@ -21,7 +21,7 @@ describe('When createUser is called', () => {
     it('Should return error 400 because user already exists with this username', async () => {
         aws.DynamoDB.DocumentClient.prototype.query.mockImplementationOnce(() => ({ promise: () => ({Items:[{username: params.username, password: hashPassword, id}]})}))
 
-        const result = await uniqueUser(params);
+        const result = await uniqueUser(params.username);
 
         expect(result).toStrictEqual({
             statusCode: 400,

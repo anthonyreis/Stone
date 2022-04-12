@@ -11,7 +11,7 @@ module.exports.validUser = async ({username, password}) => {
         
         const hashPassword = await bcrypt.hash(password, 8);
 
-        const user = await createUser(username, hashPassword)
+        const user = await createUser(username, hashPassword);
 
         if (user.statusCode) return user;
 

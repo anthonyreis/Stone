@@ -15,7 +15,7 @@ const getUser = async (event, context) => {
 
         return {
             statusCode: 200,
-            body: user
+            body: JSON.stringify(user)
         };
     } catch (err) {
         return {

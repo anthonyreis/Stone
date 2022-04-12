@@ -2,7 +2,7 @@ const aws = require('aws-sdk');
 
 const dynamodb = new aws.DynamoDB.DocumentClient();
 
-module.exports.uniqueUser = async ({username}) => {
+module.exports.uniqueUser = async (username) => {
     const params = {
         TableName: process.env.USER_TABLE_NAME,
         IndexName: 'username',
