@@ -22,15 +22,13 @@ describe('When createUser is called', () => {
 
     })
     it('Should return the user data', async () => {
-        aws.DynamoDB.DocumentClient.prototype.put.mockImplementationOnce(() => ({ promise: () => ({username: params.username, password: hashPassword, id})}))
+        aws.DynamoDB.DocumentClient.prototype.put.mockImplementationOnce(() => ({ promise: () => ({})}))
 
-        const result = await createUser(params, hashPassword);
+        const result = await createUser(params.username, hashPassword);
 
-        expect(result).toMatchObject({
-            username: params.username,
-            id,
-            password: hashPassword
-        })
+        expect(result).toHaveProperty('username');
+        expect(result.username).toEqual(params.username);
+        expect(result).toHaveProperty('id');
     })
 
     it('Should return an error because of problem to connect to db', async () => {

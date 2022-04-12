@@ -28,10 +28,10 @@ describe('When validUser is called', () => {
 
         expect(result).toStrictEqual({ 
             statusCode: 201,
-            body: {
+            body: JSON.stringify({
                 message: `User ${user.username} created successfully with id ${user.id}`,
                 token: user.token,
-            }
+            })
         })
     })
 
