@@ -4,7 +4,7 @@ const createError = require('http-errors');
 
 const dynamodb = new aws.DynamoDB.DocumentClient();
 
-module.exports.createUser = async ({username}, hashPassword) => {
+module.exports.createUser = async (username, hashPassword) => {
     try {
         const user = {
             id: uuid(),
@@ -20,7 +20,12 @@ module.exports.createUser = async ({username}, hashPassword) => {
 
         return created;
     } catch(err) {
-        throw new createError.InternalServerError('An unexpected error occurred')
+        return {
+            statusCode: err.statusCode ?? 500,
+            body: JSON.stringify({
+                message: err.message ? err.message : 'An unexpected error occurred'
+            })
+        }
     }
    
 }
