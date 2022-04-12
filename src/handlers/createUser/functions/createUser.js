@@ -13,12 +13,15 @@ module.exports.createUser = async (username, hashPassword) => {
             createdAt: new Date().toISOString(),
         }
     
-        const created = await dynamodb.put({
+        await dynamodb.put({
             TableName: process.env.USER_TABLE_NAME,
-            Item: user,
+            Item: user
         }).promise();
 
-        return created;
+        return {
+            username: user.username,
+            id: user.id,
+        }
     } catch(err) {
         return {
             statusCode: err.statusCode ?? 500,
