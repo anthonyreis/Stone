@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 
-const generatePolicy = (principalId, methodArn) => {
+const generatePolicy = (claims, methodArn) => {
     const apiGatewayWildcard = methodArn.split('/', 2).join('/') + '/*';
 
     return {
-        principalId,
+        principalId: claims.id,
         policyDocument: {
             Version: '2012-10-17',
             Statement: [
@@ -15,22 +15,23 @@ const generatePolicy = (principalId, methodArn) => {
                 },
             ],
         },
+        context: {...claims}
     };
 };
 
 
-module.exports.auth = (event, context) => {
+module.exports.auth = (event, context, callback) => {
     try {
-        if (!event.headers.authorization) context.fail('Unauthorized');
+        if (!event.headers.authorization) callback('Unauthorized');
 
         const token = event.headers.authorization.replace('Bearer ', '');
 
         const claims = jwt.verify(token, process.env.JWT_KEY);
 
-        const policy = generatePolicy(claims.id, event.routeArn);
+        const policy = generatePolicy(claims, event.routeArn);
 
-        context.succeed(policy);
+        return callback(null, policy)
     } catch (err) {
-        context.fail('Unauthorized');
+        return callback('Unauthorized');
     }
 }

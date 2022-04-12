@@ -8,6 +8,14 @@ const getUser = async (event, context) => {
         validator(schema, event.pathParameters);
 
         const { id } = event.pathParameters;
+        const {id: tokenId} = event.requestContext.authorizer.lambda;
+
+        if (id !== tokenId) return {
+            statusCode: 400,
+            body: JSON.stringify({
+                message: 'You cant access information from this user'
+            })
+        }
 
         const user = await validUser(id);
 
