@@ -11,7 +11,7 @@ const getUser = async (event, context) => {
         const {id: tokenId} = event.requestContext.authorizer.lambda;
 
         if (id !== tokenId) return {
-            statusCode: 400,
+            statusCode: 403,
             body: JSON.stringify({
                 message: 'You cant access information from this user'
             })
