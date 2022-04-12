@@ -59,7 +59,7 @@
     - url: https://u3njnkryfg.execute-api.sa-east-1.amazonaws.com/user/<id>
     
     Request (headers):
-        - Authorization: Bearer token obtido na criação do usuário
+        - Authorization: Bearer token obtido na criação do usuário, sendo valido somente o associado aquele usuário
  
     - Returns: 
     {
