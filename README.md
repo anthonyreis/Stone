@@ -2,6 +2,8 @@
 
 ## Aplicação feita utilizando Serverless e DynamoDB. Além do Jest para testes unitários
 
+### Collection do Postman disponível no repositório com os exemplos de request
+
 ### Rotas
 
 #### IncrementCounter
